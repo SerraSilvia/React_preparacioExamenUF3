@@ -9,12 +9,16 @@ import Contacte from "./pages/contacte";
 function App() {
   return (
     <BrowserRouter>
+    <div className="top-bar">
+      <h1 className="logo">ArtGallery</h1>
       <Navbar />
-
+    </div>
+      
       <Routes>
         <Route path="/inici" element={<Inici />} />
         <Route path="/imatges" element={<Imatges />} />
         <Route path="/contacte" element={<Contacte />} />
+        <Route path="/" element={<Inici />} />{/* Ruta per defecte per si l'usuari entra a "/" */}
       </Routes>
     </BrowserRouter>
   );

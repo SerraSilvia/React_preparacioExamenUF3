@@ -1,15 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-class Navbar extends React.Component {
-  render() {
-    return (
-      <nav role="navigation">
-        <NavLink to="/Inici"  aria-label="Pàgina d'inici">INICI</NavLink>
-        <NavLink to="/Imatges" aria-label="Galeria d'imatges">GALERIA D'IMATGES</NavLink>
-        <NavLink to="/Contacte" aria-label="Pàgina de contacte">CONTACTA</NavLink>
-      </nav>
-    );
-  }
+function Navbar() {
+  return (
+    <nav role="navigation" className="navbar">
+      <div className="nav-links">
+        <NavLink to="/inici" aria-label="Pàgina d'inici">INICI</NavLink>
+        <NavLink to="/imatges" aria-label="Galeria d'imatges">GALERIA</NavLink>
+        <NavLink to="/contacte" aria-label="Pàgina de contacte">CONTACTE</NavLink>
+      </div>
+    </nav>
+  );
 }
+
 export default Navbar;

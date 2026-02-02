@@ -2,21 +2,19 @@ import React, { useRef, useEffect, useState } from "react";
 
 function FormulariContacte() {
   const nomRef = useRef(null);
-
   const [nom, setNom] = useState("");
   const [cognom, setCognom] = useState("");
   const [correu, setCorreu] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    nomRef.current.focus(); // focus automático en Nom
+    nomRef.current.focus(); 
   }, []);
 
   const validarEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
   const handleEnviar = () => {
     const nousErrors = {};
-
     if (!nom.trim()) nousErrors.nom = "Nom obligatori";
     if (!cognom.trim()) nousErrors.cognom = "Cognom obligatori";
     if (!correu.trim()) {
@@ -30,34 +28,67 @@ function FormulariContacte() {
     if (Object.keys(nousErrors).length === 0) {
       alert(`Formulari enviat!\nNom: ${nom}\nCognom: ${cognom}\nCorreu: ${correu}`);
       setNom(""); setCognom(""); setCorreu("");
+      setErrors({});
     }
   };
 
   return (
-    <form>
-      <div>
-        Nom: <input ref={nomRef} value={nom} onChange={e => setNom(e.target.value)} />
-        {errors.nom && <span>{errors.nom}</span>}
-      </div>
-      <div>
-        Cognom: <input value={cognom} onChange={e => setCognom(e.target.value)} />
-        {errors.cognom && <span>{errors.cognom}</span>}
-      </div>
-      <div>
-        Correu: <input value={correu} onChange={e => setCorreu(e.target.value)} />
-        {errors.correu && <span>{errors.correu}</span>}
-      </div>
+    <div className="main">
+      <header>
+        <h1>Contacte</h1>
+      </header>
+      
+      <div className="form-container">
+        <div className="form-group">
+          <label htmlFor="nom">Nom:</label>
+          <input 
+            id="nom"
+            ref={nomRef} 
+            value={nom} 
+            onChange={e => setNom(e.target.value)} 
+            aria-label="Escriu el teu nom"
+            className={errors.nom ? "input-error" : ""}
+          />
+          {errors.nom && <span className="error-text">{errors.nom}</span>}
+        </div>
 
-      <div
-        role="button"
-        tabIndex={0}
-        onClick={handleEnviar}
-        onKeyPress={e => { if (e.key === "Enter" || e.key === " ") handleEnviar(); }}
-        style={{ padding: "4px", border: "1px solid black", display: "inline-block", marginTop: "5px", cursor: "pointer" }}
-      >
-        Enviar
+        <div className="form-group">
+          <label htmlFor="cognom">Cognom:</label>
+          <input 
+            id="cognom"
+            value={cognom} 
+            onChange={e => setCognom(e.target.value)} 
+            aria-label="Escriu el teu cognom"
+            className={errors.cognom ? "input-error" : ""}
+          />
+          {errors.cognom && <span className="error-text">{errors.cognom}</span>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="correu">Correu:</label>
+          <input 
+            id="correu"
+            value={correu} 
+            onChange={e => setCorreu(e.target.value)} 
+            aria-label="Escriu el teu correu electrònic"
+            className={errors.correu ? "input-error" : ""}
+          />
+          {errors.correu && <span className="error-text">{errors.correu}</span>}
+        </div>
+
+        {/* Botó simulat amb un div segons requeriment */}
+        <div
+          role="button"
+          tabIndex={0}
+          className="custom-button"
+          onClick={handleEnviar}
+          onKeyDown={e => { if (e.key === "Enter" || e.key === " ") handleEnviar(); }}
+          aria-label="Enviar formulari"
+        >
+          Enviar
+        </div>
       </div>
-    </form>
+    </div>
   );
 }
 
