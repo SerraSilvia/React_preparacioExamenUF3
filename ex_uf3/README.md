@@ -1,16 +1,83 @@
-# React + Vite
+# Paso 1: Instalación y Carpeta Inicial
+Primero creamos el proyecto y entramos en la carpeta. Usaremos Vite, que es el estándar actual (más rápido que create-react-app).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Abrir terminal y ejecutar:
 
-Currently, two official plugins are available:
+Bash
+npm create vite@latest galeria-art -- --template react
+cd galeria-art
+npm install
+Instalar el Router (fundamental para la navegación):
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Bash
+npm install react-router-dom
 
-## React Compiler
+# Paso 2: Organizar las Imágenes (Activos)
+Antes de programar, prepara tus archivos multimedia. Como hemos visto, la carpeta public es clave.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Ve a la carpeta public.
 
-## Expanding the ESLint configuration
+Crea una carpeta llamada img.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Copia dentro tus archivos (ej: nit_estrellada.webp, obra2.webp, etc.).
+
+Tip: Asegúrate de que los nombres no tengan espacios ni mayúsculas extrañas.
+
+# Paso 3: Crear la Estructura de Carpetas
+Dentro de la carpeta src, organiza tus archivos para que el proyecto sea escalable:
+
+src/components/: Para el Navbar.jsx y el FormulariContacte.jsx.
+
+src/pages/: Para Inici.jsx, Imatges.jsx y Contacte.jsx.
+
+# Paso 4: Configurar la Navegación Global (App.jsx)
+Este es el "cerebro". Aquí defines qué se muestra según la URL.
+
+Importa los componentes de react-router-dom.
+
+Envuelve todo en <BrowserRouter>.
+
+Define tus <Routes> y <Route>.
+
+Coloca el <Navbar /> fuera de las rutas pero dentro del router para que sea visible en todas las páginas.
+
+# Paso 5: Crear el Navbar (Navbar.jsx)
+Crea el menú de navegación usando <NavLink>. Recuerda que esto permite cambiar de página sin que la web parpadee (Single Page Application).
+
+# Paso 6: Crear las Páginas de Contenido
+Ahora rellena cada archivo de la carpeta pages:
+
+Inici.jsx: El diseño de bienvenida.
+
+Imatges.jsx: Aquí creas el array de objetos con las rutas de las imágenes y usas el .map() para generar la cuadrícula.
+
+Contacte.jsx: Importa aquí tu componente de formulario.
+
+# Paso 7: El Formulario (FormulariContacte.jsx)
+Crea la lógica del formulario:
+
+Define los useState para cada campo.
+
+Usa el useRef y useEffect para el focus automático.
+
+Crea la función handleEnviar con las validaciones y el alert.
+
+# Paso 8: El Diseño Final (App.css)
+Coge todo el CSS y pégalo en tu archivo de estilos.
+
+Primero el diseño de escritorio (Grid, Flexbox).
+
+Al final, las Media Queries (@media (max-width: 768px)) para el menú apilado y la galería de una sola columna.
+
+# Paso 9: Probar y Desplegar
+Para ver tu progreso, ejecuta en la terminal:
+
+Bash
+npm run dev
+Abre el enlace que te dé (normalmente http://localhost:5173) y prueba:
+
+- Que el menú cambie de color al hacer clic (clase .active).
+
+- Que el formulario dé error si dejas campos vacíos.
+
+- Que al encoger la ventana del navegador, todo se ponga en una columna.
