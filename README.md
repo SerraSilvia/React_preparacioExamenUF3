@@ -12,5 +12,3 @@ npm run dev
 
 Si es vol usar react-router (opcional)
 npm install react-router-dom
-
-Com fer un projecte:
